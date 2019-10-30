@@ -1,5 +1,8 @@
 # 从海龟绘图模块中导入全部函数
+# 在 Python v3.8中已经内置此模块，如果其它 Python 版本没有内置，需要使用 pip 安装
 from turtle import *
+
+# 开始绘制五星红旗
 def daw_flag():
     # 设置大小，4个参数：宽度、高度、起始值x轴、起始值y轴
     setup(600, 400, 0, 0)
@@ -47,8 +50,9 @@ def draw_star(gotox_val, gotoy_val, heading_val=0, fd_val=50, rt_val=0, lt_val=0
     # 结束填充
     end_fill()
 
+# 程序入口
 if __name__=="__main__":
     print('开始绘制五星红旗')
     daw_flag()
     print('结束绘制五星红旗')
-    input('暂停，等待输入（输入任意内容可退出）：')
+    input('暂停，等待输入（输入任意内容按回车键可退出）：')
