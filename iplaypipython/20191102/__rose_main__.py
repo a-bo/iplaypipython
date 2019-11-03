@@ -1,3 +1,4 @@
+# 导入海龟绘图模块
 import turtle as t
 # 定义一个曲线绘制函数
 def DegreeCurve(n, r, d=1):
