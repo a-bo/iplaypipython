@@ -25,10 +25,11 @@ def draw_tree(branch_len, t, cr):
     new_color.remove(cr)
     new_cr = rm.choice(new_color)
     # 随机转动角度，用于分叉树枝
-    ag = rm.choice(angle)
+    ag1 = rm.choice(angle)
+    ag2 = rm.choice(angle)
     # 分叉树枝的长度，默认等于树干的长度
     new_branch_len = branch_len
-    # 分叉树枝的长度计算
+    # 分叉树枝的长度重新计算，越来越短
     if branch_len > 120:
         new_branch_len = branch_len - 20
     elif branch_len >= 60:
@@ -39,20 +40,21 @@ def draw_tree(branch_len, t, cr):
         new_branch_len = branch_len - 5
     # 开始绘制
     if 10 >= branch_len:
-        # 无需绘制，递归结束
+        # 树枝太短，无需绘制，递归结束
         pass
     else:
         # 向前移动，绘制树干
         t.forward(branch_len)
-        # 右转指定角度，分叉
-        t.right(ag)
+        # 右转指定角度1，分叉
+        t.right(ag1)
         # 递归画树干，可以理解成子树
         draw_tree(new_branch_len, t, new_cr)
-        # 左转指定角度，分叉
-        t.left(ag + ag)
+        # 左转指定角度2，分叉
+        t.left(ag1 + ag2)
         draw_tree(new_branch_len, t, new_cr)
-        t.right(ag)
-        # 后退
+        # 角度回正，右转指定角度2
+        t.right(ag2)
+        # 恢复颜色并后退
         t.color(cr)
         t.backward(branch_len)
 
@@ -77,7 +79,7 @@ def draw_fire_cilver():
     t.left(15)
     for i in range(0,7):
         # 绘制1棵，右转5度
-        print('====绘制第[' + i + ']棵树')
+        print('====绘制第[' + str(i + 1) + ']棵树')
         draw_tree(150, t, 'cyan')
         t.right(5)
     # 单机退出

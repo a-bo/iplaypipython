@@ -92,7 +92,7 @@ def draw_cherry():
     # 画布
     w = turtle.Screen()
     # 设置大小，4个参数：宽度、高度、起始值x轴、起始值y轴
-    w.setup(1000, 600, 0, 0)
+    w.setup(1000, 600, 200, 100)
     # 设置背景为小麦颜色
     w.bgcolor('wheat')
     # 隐藏画笔
@@ -101,7 +101,7 @@ def draw_cherry():
     t.getscreen().tracer(5, 0)
     t.left(90)
     t.up()
-    t.backward(150)
+    t.backward(200)
     t.down()
     # 1、画樱花的躯干
     draw_tree(60, t)
