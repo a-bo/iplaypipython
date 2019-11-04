@@ -75,8 +75,9 @@ def draw_fire_cilver():
     turtle.tracer(5)
     # 垂直位置绘制1棵，左右边再各绘制3棵，共7棵
     t.left(15)
-    for ag in range(1,7):
+    for i in range(0,7):
         # 绘制1棵，右转5度
+        print('====绘制第[' + i + ']棵树')
         draw_tree(150, t, 'cyan')
         t.right(5)
     # 单机退出
