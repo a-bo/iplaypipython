@@ -2,22 +2,19 @@
 import turtle as t
 
 # 定义一个曲线绘制函数
+# 思路就是画多个小圆弧，构成曲线
+# n表示画多少次圆弧，n越大画的曲线越长
+# r表示圆弧半径，r越大则曲线越平滑
+# d=1 则是左弯的圆弧，d=-1 则是右弯的圆弧（由于屏幕的分辨率不同，有时候看不出来明显的弯度）
 def degree_curve(n, r, d=1):
     for i in range(n):
         t.left(d)
+        # r是半径，abs(d)是夹角
         t.circle(r, abs(d))
 
 # 绘制玫瑰花
-def draw_rose():
-    # 初始位置设定
-    s = 0.2
-    # 设置弹窗大小
-    t.setup(450 * 5 * s, 750 * 5 * s)
-    # 背景颜色
-    t.bgcolor('wheat')
-    t.pencolor("black")
-    # 设置填充颜色为红色，绘制花朵
-    t.fillcolor("red")
+def draw_rose(s):
+    # 设置画笔速度
     t.speed(100)
     # 提起画笔，移动到指定位置
     t.penup()
@@ -25,89 +22,159 @@ def draw_rose():
     # 放下画笔
     t.pendown()
 
-    # 绘制花朵形状
+    # 开始填充，并绘制花朵形状
     t.begin_fill()
-    t.circle(200 * s,30)
+    # 起步花蕊的曲线，30度圆弧，一层椭圆下侧
+    t.circle(200 * s, 30)
+    # 左弯曲线，60次半径为10的圆弧，一层椭圆右侧
     degree_curve(60, 50 * s)
-    t.circle(200 * s,30)
+    # 和起步花蕊的曲线对称，30度圆弧
+    t.circle(200 * s, 30)
+    # 左弯曲线，4次半径为20的圆弧，为了调整角度
     degree_curve(4, 100 * s)
-    t.circle(200 * s,50)
+    # 50度圆弧，一层椭圆上侧
+    t.circle(200 * s, 50)
+    # 左弯曲线，50次半径为10的圆弧，一层椭圆左侧下侧
     degree_curve(50, 50 * s)
-    t.circle(350 * s,65)
+    # 65度圆弧，一层椭圆下侧
+    t.circle(350 * s, 65)
+    # 左弯曲线，40次半径为14的圆弧，二层椭圆右侧
     degree_curve(40, 70 * s)
-    t.circle(150 * s,50)
+    # 50度圆弧，二层椭圆右侧上侧
+    t.circle(150 * s, 50)
+    # 右弯曲线，20次半径为10的圆弧，二层椭圆上侧
     degree_curve(20, 50 * s, -1)
-    t.circle(400 * s,60)
+    # 60度圆弧，二层椭圆上侧
+    t.circle(400 * s, 60)
+    # 右弯曲线，18次半径为10的圆弧，二层椭圆左侧
     degree_curve(18, 50 * s)
+    # 前进125，直线，二层椭圆左侧连接处
     t.fd(250 * s)
+    # 右转150度
     t.right(150)
-    t.circle(-500 * s,12)
+    # 12度圆弧，顺时针画圆，右弯曲线
+    t.circle(-500 * s, 12)
+    # 左转140度
     t.left(140)
-    t.circle(550 * s,110)
+    # 110度圆弧，左侧花瓣边缘
+    t.circle(550 * s, 110)
+    # 左转27度
     t.left(27)
-    t.circle(650 * s,100)
+    # 100度圆弧，右侧花瓣边缘
+    t.circle(650 * s, 100)
+    # 左转130度
     t.left(130)
-    t.circle(-300 * s,20)
+    # 20度圆弧，顺时针画圆
+    t.circle(-300 * s, 20)
+    # 右转123度
     t.right(123)
-    t.circle(220 * s,57)
+    # 57度圆弧，连接到二层椭圆右侧
+    t.circle(220 * s, 57)
+    # 至此图形封闭，颜色填充完成
     t.end_fill()
-    
-    # 绘制花枝形状
+
+    # 绘制花枝形状，包括勾勒花瓣中间的线条
+    # 左转120度
     t.left(120)
+    # 前进140
     t.fd(280 * s)
+    # 左转115度
     t.left(115)
-    t.circle(300 * s,33)
+    # 33度圆弧，连接到右侧花瓣边缘
+    t.circle(300 * s, 33)
+    # 左转180度
     t.left(180)
-    t.circle(-300 * s,33)
+    # 33度圆弧，顺时针，为了回到上一步画圆弧之前的位置
+    t.circle(-300 * s, 33)
+    # 右弯曲线，70次半径为113的圆弧，右侧花瓣线条
     degree_curve(70, 225 * s, -1)
-    t.circle(350 * s,104)
+    # 104度圆弧，右侧花瓣线条
+    t.circle(350 * s, 104)
+    # 左转90度
     t.left(90)
-    t.circle(200 * s,105)
-    t.circle(-500 * s,63)
+    # 105度圆弧，左侧花瓣线条
+    t.circle(200 * s, 105)
+    # 63度弧度，顺时针，左侧花瓣线条，至此花瓣线条完成
+    t.circle(-500 * s, 63)
+    # 提起画笔，移动到指定位置，花瓣与花枝连接处
     t.penup()
-    t.goto(170 * s,-30 * s)
+    t.goto(170 * s, -30 * s)
+    # 放下画笔
     t.pendown()
+    # 左转160度，朝向调整为朝下
     t.left(160)
+    # 左弯曲线，20次半径为1250的圆弧，花枝
     degree_curve(20, 2500 * s)
+    # 右弯曲线，220次半径为125的圆弧，花枝
     degree_curve(220, 250 * s, -1)
-    
-    # 绘制一个绿色叶子
+
+    # 下面开始绘制2片绿叶
+    # 绘制一个绿色叶子，上方的
     t.fillcolor('green')
+    # 提起画笔移动到指定位置，叶尖
     t.penup()
-    t.goto(670 * s,-180 * s)
+    t.goto(670 * s, -180 * s)
     t.pendown()
+    # 右转140度，调整角度
     t.right(140)
+    # 开始填充
     t.begin_fill()
+    # 120度弧度，绿叶上侧
     t.circle(300 * s, 120)
+    # 左转60度
     t.left(60)
+    # 120度弧度，绿叶下侧
     t.circle(300 * s, 120)
+    # 完成填充
     t.end_fill()
     t.penup()
+    # 移动到绿叶枝条起始处
     t.goto(180 * s, -550 * s)
     t.pendown()
+    # 右转85度
     t.right(85)
+    # 40度圆弧，绿叶枝条
     t.circle(600 * s, 40)
     
-    # 绘制另一个绿色叶子
+    # 绘制另一个绿色叶子，下方的
+    # 提笔，移动到叶尖
     t.penup()
-    t.goto(-150 * s,-1000 * s)
+    t.goto(-150 * s, -1000 * s)
     t.pendown()
     t.begin_fill()
+    # 右转120度，调整角度
     t.rt(120)
-    t.circle(300 * s,115)
+    # 115度圆弧，叶子下侧
+    t.circle(300 * s, 115)
+    # 左转75度
     t.left(75)
-    t.circle(300 * s,100)
+    # 100度弧度，叶子上侧
+    t.circle(300 * s, 100)
     t.end_fill()
     t.penup()
-    t.goto(430 * s,-1070 * s)
+    # 移动到绿叶枝条起始处
+    t.goto(430 * s, -1070 * s)
     t.pendown()
+    # 右转30度，调整角度
     t.right(30)
-    t.circle(-600 * s,35)
+    # 35度圆弧，右弯，叶子枝条
+    t.circle(-600 * s, 35)
+    # 等待退出
     t.exitonclick()
 
 # 程序入口
 if __name__=="__main__":
     print('开始绘制玫瑰花')
-    draw_rose()
+    # 比例设定
+    s = 0.2
+    # 设置弹窗大小
+    t.setup(500 * 5 * s, 750 * 5 * s)
+    # 背景颜色，小麦色
+    t.bgcolor('wheat')
+    # 设置画笔颜色，黑色
+    t.pencolor("black")
+    # 设置填充颜色为红色，绘制花朵
+    t.fillcolor("red")
+    draw_rose(s)
     print('结束绘制玫瑰花')
     # input('暂停，等待输入（输入任意内容按回车键可退出）：')
